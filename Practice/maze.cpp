@@ -27,3 +27,26 @@ Output
 7
 */
 
+#include <iostream>
+#include <algorithm>
+#include <queue>
+
+using namespace std;
+typedef pair<int,int> ii;
+const int MAX = 1e3+3;
+
+int n, m, r, c;
+int a[MAX][MAX], dd[MAX][MAX];
+queue <ii> vitri;
+
+
+int main() {
+
+    cin >> n >> m >> r >> c;
+
+    for(int i = 1; i <= n; ++i)
+        for(int j = 1; j <= m; ++j) cin >> a[i][j]; 
+
+    return 0;
+}
+
