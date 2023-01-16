@@ -21,7 +21,31 @@ Output:​
 #include <algorithm>
 
 using namespace std;
+const int MAX = 1e3+3;
+int n, k1, k2;
+int a[MAX]; // a[i]: so cach lam den ngay thu i ma ngay i nghi
+int b[MAX]; // b[i]: so cach lam den ngay thu i ma ngay i di lam
+
 
 int main() {
-    
+    cin >> n >> k1 >> k2;
+
+    for(int i = 1; i <= n; ++i) {
+        a[i] = 0;
+        b[i] = 0;
+    }
+
+    a[0] = 1; a[1] = 1; b[k1] = 1;
+
+    for(int i = k1+1; i <= n; ++i) {
+        a[i] = b[i-1];
+        b[i] = 0;
+
+        for(int j = k1; j <= k2; ++j) {
+            if (i - j >= 0) b[i] += a[i-j];
+        }
+    }
+
+    cout << a[n] + b[n];
+    return 0;
 }
