@@ -1,5 +1,5 @@
 // Integer Linear Equation
-
+// 100/100
 #include <iostream>
 #include <algorithm>
 
