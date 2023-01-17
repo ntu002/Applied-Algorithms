@@ -1,5 +1,5 @@
 // balanced course assignment 
-
+// AC 100/100
 #include <iostream>
 #include <algorithm>
 #include <vector>
