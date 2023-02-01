@@ -1,14 +1,13 @@
-// longest common Subsequence
-
 //Longest Common Subsequence
+// 60/100
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
-const int MAX = 1e6 + 6;
-const int MAXn = 1e4 + 3;
+const int MAX = 1e4 + 4;
+const int MAXn = 1e3 + 3;
 int n, m;
-int a[MAX], b[MAX];
+int a[MAXn], b[MAXn];
 int s[MAXn][MAXn];
 
 int main() {
