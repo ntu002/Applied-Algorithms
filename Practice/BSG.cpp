@@ -1,5 +1,5 @@
 // Binary sequence generation
-
+// AC - 100/100
 /*
 Given an integer n, write a program that generates all the binary sequences of length n in a lexicographic order.
 
