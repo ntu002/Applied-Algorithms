@@ -1,52 +1,87 @@
-// Maze
-
-/*
-Một mê cung hình chữ nhật được biểu diễn bởi 0-1 ma trận NxM trong đó A[i,j] = 1 thể hiện ô (i,j) là tường gạch và A[i,j] = 0 thể hiện ô (i,j) là ô trống, có thể di chuyển vào. Từ 1 ô trống, ta có thể di chuyển sang 1 trong 4 ô lân cận (lên trên, xuống dưới, sang trái, sang phải) nếu ô đó là ô trống. Xuất phát từ 1 ô trống trong mê cung, hãy tìm đường ngắn nhất thoát ra khỏi mê cung.
-
-Input
-Dòng 1: ghi 4 số nguyên dương n, m, r, c trong đó n và m tương ứng là số hàng và cột của ma trận A (1 <= n,m <= 999) và r, c tương ứng là chỉ số hàng, cột của ô xuất phát.
-Dòng i+1 (i=1,...,n): ghi dòng thứ i của ma trận A
-
-Output
-Ghi giá số bước cần di chuyển ngắn nhất để thoát ra khỏi mê cung, hoặc ghi giá trị -1 nếu không tìm thấy đường đi nào thoát ra khỏi mê cung.
-
-Ví dụ
-
-Input
-8 12 5 6
-1 1 0 0 0 0 1 0 0 0 0 1
-1 0 0 0 1 1 0 1 0 0 1 1
-0 0 1 0 0 0 0 0 0 0 0 0
-1 0 0 0 0 0 1 0 0 1 0 1
-1 0 0 1 0 0 0 0 0 1 0 0
-1 0 1 0 1 0 0 0 1 0 1 0
-0 0 0 0 1 0 1 0 0 0 0 0
-1 0 1 1 0 1 1 1 0 1 0 1
-
-Output
-7
-*/
-
 #include <iostream>
 #include <algorithm>
-#include <queue>
 
 using namespace std;
-typedef pair<int,int> ii;
-const int MAX = 1e3+3;
+int a[10][10];
+bool markR[10][10], markC[10][10], markSquare[10][10][10];
+long long dem;
+bool found;
+void Result() {
+    for (int i = 0; i <= 8; ++i) {
+        for (int j = 0; j <= 8; ++j) cout << a[i][j] << " ";
+        cout << endl;
+    }
+}
 
-int n, m, r, c;
-int a[MAX][MAX], dd[MAX][MAX];
-queue <ii> vitri;
+bool Check(int v, int r, int c) {
+    return (markR[r][v] == false && markC[c][v] == false && markSquare[r/3][c/3][v] == false);
+}
 
+void Try(int r, int c)
+{
+    for (int v = 1; v <= 9; ++v)
+    {
+        if (Check(v,r,c) && a[r][c] == 0) {
+            a[r][c] = v;
+            markR[r][v] = true;
+            markC[c][v] = true; 
+            markSquare[r/3][c/3][v] = true;
+            if (r == 8 and c == 8) {
+                dem++;
+                //Result();
+                //cout << "--------------------------" << endl;
+                //break;
+            }
+            else {
+                    if (c < 8) Try(r, c+1); else Try(r+1, 0); 
+            }
+            
+            markR[r][v] = false;
+            markC[c][v] = false;
+            markSquare[r/3][c/3][v] = false;
+        }
+        else {
+            if (r == 8 and c == 8) {
+                dem++;
+                //Result();
+                //cout << "--------------------------" << endl;
+                //break;
+            }
+            else {
+                if (c < 8) Try(r, c+1); else Try(r+1, 0); 
+            }
+        }
+    }
 
-int main() {
+}
 
-    cin >> n >> m >> r >> c;
+int main()
+{
+    for (int r = 0; r <= 8; ++r) 
+        for (int c = 0; c <= 8; ++c) cin >> a[r][c];
+    for (int v = 1; v <= 9; ++v) {
+        for(int r = 0; r <= 8; ++r) markR[r][v] = false;
+        for(int c = 0 ; c <= 8; ++c) markR[c][v] = false;
 
-    for(int i = 1; i <= n; ++i)
-        for(int j = 1; j <= m; ++j) cin >> a[i][j]; 
+        for (int i = 0; i <= 2; ++i)
+            for (int j = 0; j <= 2; ++j) markSquare[i][j][v] = false;
+    }
+
+    for (int v = 1; v <= 9; ++v) {
+        for(int r = 0; r <= 8; ++r) 
+            for (int c = 0; c <= 8; ++c) 
+                if (a[r][c] == v) {
+                    markR[r][v] = true;
+                    markC[c][v] = true;
+                    markSquare[r/3][c/3][v] = true;
+                }
+        
+        // for (int i = 0; i <= 2; ++i)
+        //     for (int j = 0; j <= 2; ++j) markSquare[i][j][v] = false;
+    }
+    dem = 0;
+    Try(0,0);
+    cout << dem;
 
     return 0;
 }
-
