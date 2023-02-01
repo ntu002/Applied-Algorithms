@@ -1,3 +1,6 @@
+// Max SubSequence
+// 80/120
+
 #include <iostream>
 #include <algorithm>
 
@@ -45,6 +48,8 @@ int SubSeqMax(int x, int y)
         int wM = mR + mL;
         return max(max(wR, wL), wM);
     }
+
+    return a[y];
 }
 
 int main()
