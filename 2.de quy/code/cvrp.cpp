@@ -1,3 +1,19 @@
+// Capacitated Vehicle Routing - Not Empty Route Allowed
+// AC - 100/100
+
+/*
+Input: 
+4 2 15
+7 7 11 2
+0 12 12 11 14
+14 0 11 14 14
+14 10 0 11 12
+10 14 12 0 13
+10 13 14 11 0
+Output: 
+70
+*/
+
 #include <iostream>
 #include <algorithm>
 
