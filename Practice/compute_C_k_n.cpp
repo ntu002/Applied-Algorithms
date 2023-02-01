@@ -1,4 +1,5 @@
 // Compute C_k_n
+// AC - 100/100
 
 /*
 Given two positive integers k and n. Compute C(k,n) which is the number of ways to select k objects from a given set of n objects.
