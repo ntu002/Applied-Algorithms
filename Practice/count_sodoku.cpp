@@ -79,7 +79,7 @@ void Try(int r, int c) {
 
     if (a[r][c] == 0) {
         for(int v = 1; v <= 9; ++v) {
-            cout << r << c << v << ": " << Check(v,r,c) << " | ";
+            //cout << r << c << v << ": " << Check(v,r,c) << " | ";
         if (Check(v,r,c)) {
             //cout << r << " " << c << " : " << v << " | ";
             a[r][c] = v;
@@ -97,7 +97,7 @@ void Try(int r, int c) {
                 if (c < 8) Try(r, c+1); 
                 else 
                     if (r < 8) Try(r+1, 0);
-                    cout << endl;
+                    //cout << endl;
             }
 
             a[r][c] = 0;
@@ -105,15 +105,6 @@ void Try(int r, int c) {
             markR[r][v] = false;
             markSquare[r/3][c/3][v] = false;
         } 
-        else {
-            if (r == 8 && c == 8) {
-                dem++;
-            } else {
-                if (c < 8) Try(r, c+1); 
-                else 
-                    if (r < 8) Try(r+1, 0);
-            }
-        }
     }
     } else {
             if (r == 8 && c == 8) {
@@ -149,23 +140,10 @@ int main() {
                 }
     }
 
-    // for(int v = 1; v <= 9; ++v) {
-    //     for(int r = 0; r <= 8; ++r)
-    //         for(int c = 0; c <= 8; ++c)
-    //             // if (a[r][c] == v) {
-    //             //     markR[r][v] = true;
-    //             //     markC[c][v] = true;
-    //             //     markSquare[r/3][c/3][v] = true;
-    //             // }
-    //             {
-    //                 cout << r << c << v << markSquare[r/3][c/3][v] << " | ";
-    //             }
-    //             cout << endl;
-    // }
 
     dem = 0;
     Try(0,0);
 
-    //cout << dem;
+    cout << dem;
     return 0;
 }
