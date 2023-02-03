@@ -17,12 +17,14 @@ int res;
 // u -> diem bat dau
 int tsp(int S, int u) {
     // xet het tat ca cac truong hop
+    // (1<<n) = 2^n; -> dich sang trai n lan
     if (S == (1<<n) - 1) return a[u][0];
     // dp[S][u] != INF -> da co gia tri
     if (dp[S][u] != INF) return dp[S][u];
     for (int v = 0; v < n; v++) {
+        // & -> AND
         if (!(S & (1<<v))) {
-            dp[S][u] = min(dp[S][u], a[u][v] + tsp(S|(1<<v), v));
+            dp[S][u] = min(dp[S][u], a[u][v] + tsp(S|(1<<v), v)); // | -> OR
         }
     }
     return dp[S][u];
