@@ -11,15 +11,14 @@ int f;
 
 void Try(int k) {
 
-    for (int v = 0; v <= 1; ++v) {
+    for (int v = 0; v <= 1; ++v) {  
         f += a[k]*v;
         if (k == n) {
             if (f >= x && f <= y) res++;
         } else Try(k+1);
-        f -= a[k]*v;
+       f -= a[k]*v;
     }
-
-}
+} 
 
 int main() {
 
