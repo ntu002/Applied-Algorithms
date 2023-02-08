@@ -5,14 +5,20 @@
 #include <vector>
 #include <queue>
 #include <utility>
+#include <string.h>
+#include <string.h>
 
 using namespace std;
 const int MAXn = 1e4+4;
 int n, m;
 int res;
-int d[MAXn];
+int d[MAXn]; // d[i] = x: dinh i se thuc hien sau x dinh
 int x[MAXn];
 vector<int> L; // danh sach TOPO cac nut cua G
+    // TOPO: Thứ tự Tô-pô của một đồ thị có hướng 
+    // là một thứ tự sắp xếp của các đỉnh sao cho 
+    // với mọi cung từ đỉnh 𝑢 đến đỉnh 𝑣 trong đồ thị, 
+    // 𝑢 luôn nằm trước 𝑣
 vector <pair<int, int> > a[MAXn];
 int f[MAXn];
     // f[u]: thoi diem som nhat ma nhiem vu u co the bat dau.
@@ -23,22 +29,28 @@ void topo() {
     for(int i = 1; i <= n; ++i)
         if (x[i] == 0) q.push(i);
 
+    // q = {4, 7}
     while ((!q.empty())) {
         int t = q.front(); q.pop();
+        //cout << t << " ";
 
         L.push_back(t);
 
-        for(int i = 0; i < a[i].size(); ++i) {
+        for(int i = 0; i < a[t].size(); ++i) {
             int y = a[t][i].first;
-            int w = a[t][i].second;
 
+            //cout << y << " " << x[y] << endl;
+            
             x[y] -= 1;
             if (x[y] == 0) q.push(y);
         }
     }
+
+    // cout << endl;
+    // cout << L.size();
 }
 
-// makepan = max(makepan, f[u] + d[u])
+// res = max(res, f[u] + d[u])
 // f[v] = max(f[v], f[u] + d[u])
 
 void Solve() {
@@ -46,7 +58,7 @@ void Solve() {
     res = 0;
 
     for(int i = 0; i < L.size(); ++i) {
-        cout << L[i] << " ";
+        //cout << L[i] << " ";
         int u = L[i];
         res = max(res, f[u] + d[u]);
 
